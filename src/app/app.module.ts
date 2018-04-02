@@ -14,6 +14,9 @@ import { RegistrationComponent } from './registration/registration.component';
 // Import smart routing
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 
+// Import HttpClient
+import {HttpModule} from '@angular/http';
+
 const appRoutes: Routes = [
   {
     path: '',
@@ -43,6 +46,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     RouterModule.forRoot(
       appRoutes, {
         useHash: false

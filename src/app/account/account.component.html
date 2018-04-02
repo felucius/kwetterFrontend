@@ -2,11 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{name}}</title>
+    <title>{{title}}</title>
 </head>
 <body>
   <div class="container-fluid text-center">
     <h1>Account page</h1>
+  </div>
+
+  <!--S0 Profiel foto en naam-->
+  <div class="name container-fluid text-center">
+    <img src="../../assets/avatarpicture.jpg" width="15%" height="15%">
+    <p>name: {{account.name}}</p>
+  </div>
+
+  <!--S1 Profiel details-->
+  <div class="personalinformation container-fluid text-center">
+    <p>bio: {{account.bio}}</p>
+    <p>email: {{account.email}}</p>
+    <p>location: {{account.location}}</p>
+    <p>website: {{account.website}}</p>
+  </div>
+
+  <!--S2 Eigen tweets-->
+  <div class="tweets conainter-fluid text-center">
+
+    <!--
+    <ul>
+      <ul *ngFor="let account of accounts" >
+        Info: {{account.email}}, Name: {{account.name}}
+      </ul>
+    </ul>
+    -->
+
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Message</th>
+        <th scope="col">Published</th>
+        <th scope="col">Tags</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>hello</td>
+        <td>11-04-2018</td>
+        <td>Cool</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </body>
 </html>
