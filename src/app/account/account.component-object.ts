@@ -1,5 +1,5 @@
 
-export class AccountComponentObject {
+export class Account {
   // Fields
   public name: String;
   public email: String;
@@ -9,9 +9,9 @@ export class AccountComponentObject {
   public picture: String;
   public website: String;
 
-  constructor(name: String, email: String, bio: String, location: String, password: String,
+  constructor(username: String, email: String, bio: String, location: String, password: String,
               picture: String, website: String) {
-    this.name = name;
+    this.name = username;
     this.email = email;
     this.bio = bio;
     this.location = location;
@@ -19,6 +19,7 @@ export class AccountComponentObject {
     this.picture = picture;
     this.website = website;
   }
+
 
   getUsername() {
     return this.name;

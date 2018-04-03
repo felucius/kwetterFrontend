@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{title}}</title>
 </head>
 <body>
   <div class="container-fluid text-center">
-    <h1>Account page</h1>
+    <h1>{{title}}</h1>
   </div>
 
   <!--S0 Profiel foto en naam-->
@@ -24,34 +23,49 @@
   </div>
 
   <!--S2 Eigen tweets-->
-  <div class="tweets conainter-fluid text-center">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Message</th>
+      <th scope="col">Published</th>
+      <th scope="col">Tags</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let tweet of tweets">
+      <td>{{tweet.message}}</td>
+      <td>{{tweet.published}}</td>
+      <td>{{tweet.tags}}</td>
+    </tr>
+    </tbody>
+  </table>
 
-    <!--
-    <ul>
-      <ul *ngFor="let account of accounts" >
-        Info: {{account.email}}, Name: {{account.name}}
-      </ul>
-    </ul>
-    -->
 
-    <table class="table">
-      <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Message</th>
-        <th scope="col">Published</th>
-        <th scope="col">Tags</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>hello</td>
-        <td>11-04-2018</td>
-        <td>Cool</td>
-      </tr>
-      </tbody>
-    </table>
+  <!--S3 Following-->
+  <div class="container-fluid col-md-6 text-center">
+    <div class="container-fluid text-center">
+      <div *ngIf="following.length > 0; else noFollowing">
+        <ul *ngFor="let follow of following">
+          <p>following: {{follow.name}}</p>
+        </ul>
+      </div>
+      <ng-template #noFollowing>
+        following: 0
+      </ng-template>
+    </div>
+
+    <!--S4 Followers-->
+    <div class="container-fluid text-center">
+      <div *ngIf="followers.length > 0; else noFollowers">
+        <ul *ngFor="let follower of followers">
+          <p>followers: {{follower.name}}</p>
+        </ul>
+      </div>
+      <ng-template #noFollowers>
+         followers: 0
+      </ng-template>
+    </div>
   </div>
+
 </body>
 </html>

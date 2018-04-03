@@ -8,14 +8,16 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Import components
 import { HomeComponent } from './home/home.component';
-import { AccountComponent } from './account/account.component';
+import {AccountComponent} from './account/account.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { TweetComponent } from './account/tweet.component';
 
 // Import smart routing
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 
 // Import HttpClient
 import {HttpModule} from '@angular/http';
+
 
 const appRoutes: Routes = [
   {
@@ -42,7 +44,8 @@ const appRoutes: Routes = [
     AppComponent,
     HomeComponent,
     RegistrationComponent,
-    AccountComponent
+    AccountComponent,
+    TweetComponent
   ],
   imports: [
     BrowserModule,

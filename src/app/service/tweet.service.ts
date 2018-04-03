@@ -2,13 +2,13 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
-import {Observable} from 'rxjs/Observable';
-import
+import { Observable } from 'rxjs/Observable';
+import { Tweet} from '../account/tweet.component-object';
 
 @Injectable()
 export class TweetService {
 
-  constructor(http: Http) {
+  constructor(private http: Http) {
 
   }
 
@@ -17,5 +17,8 @@ export class TweetService {
     return body;
   }
 
-
+  getTweetsFromUser(name: String): Observable<Tweet[]> {
+    return this.http.get('http://localhost:8080/KwetterBackend_Maxime/api/users/gettweetsfromuser/' + name)
+      .map(this.extractData);
+  }
 }
