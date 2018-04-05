@@ -9,61 +9,97 @@
   </div>
 
   <!--S0 Profiel foto en naam-->
-  <div class="name container-fluid text-center">
-    <img src="../../assets/avatarpicture.jpg" width="15%" height="15%">
-    <p>name: {{account.name}}</p>
+  <div class="container">
+    <h2 class="text-center">Profile</h2>
+    <br>
+    <div class="row justify-content-center">
+      <div class="name col text-center">
+        <img class="img-responsive" src="../../assets/avatarmen.png" width="45%">
+        <p>name: {{account.name}}</p>
+      </div>
+
+      <!--S1 Profiel details-->
+      <div class="personalinformation col justify-content-center text-center">
+        <p>bio: {{account.bio}}</p>
+        <p>email: {{account.email}}</p>
+        <p>location: {{account.location}}</p>
+        <p>website: {{account.website}}</p>
+      </div>
+    </div>
+    <br>
+    <br>
   </div>
 
-  <!--S1 Profiel details-->
-  <div class="personalinformation container-fluid text-center">
-    <p>bio: {{account.bio}}</p>
-    <p>email: {{account.email}}</p>
-    <p>location: {{account.location}}</p>
-    <p>website: {{account.website}}</p>
-  </div>
+  <br>
 
   <!--S2 Eigen tweets-->
-  <table class="table">
-    <thead>
-    <tr>
-      <th scope="col">Message</th>
-      <th scope="col">Published</th>
-      <th scope="col">Tags</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let tweet of tweets">
-      <td>{{tweet.message}}</td>
-      <td>{{tweet.published}}</td>
-      <td>{{tweet.tags}}</td>
-    </tr>
-    </tbody>
-  </table>
+  <div class="container">
+    <h2 class="text-center">Messages</h2>
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">Message</th>
+        <th scope="col">Published</th>
+        <th scope="col">Tags</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let tweet of tweets">
+        <td>{{tweet.message}}</td>
+        <td>{{tweet.published}}</td>
+        <td>{{tweet.tags}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 
+  <!--S3 + S4 Following & Followers-->
+  <div class="container">
+    <div class="row">
 
-  <!--S3 Following-->
-  <div class="container-fluid col-md-6 text-center">
-    <div class="container-fluid text-center">
-      <div *ngIf="following.length > 0; else noFollowing">
-        <ul *ngFor="let follow of following">
-          <p>following: {{follow.name}}</p>
-        </ul>
+      <!--S3 Following-->
+      <div class="col text-center">
+        <h2 class="text-center">Following</h2>
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">{{following.length}}</th>
+            </tr>
+            </thead>
+            <tbody *ngIf="following.length > 0; else noFollowing">
+            <tr *ngFor="let follow of following">
+              <td>{{follow.name}}</td>
+            </tr>
+            <ng-template #noFollowing>
+              <tr>
+                following: 0
+              </tr>
+            </ng-template>
+            </tbody>
+          </table>
       </div>
-      <ng-template #noFollowing>
-        following: 0
-      </ng-template>
-    </div>
 
-    <!--S4 Followers-->
-    <div class="container-fluid text-center">
-      <div *ngIf="followers.length > 0; else noFollowers">
-        <ul *ngFor="let follower of followers">
-          <p>followers: {{follower.name}}</p>
-        </ul>
+      <!--S4 Followers-->
+      <div class="col text-center">
+        <h2 class="text-center">Followers</h2>
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">{{followers.length}}</th>
+          </tr>
+          </thead>
+          <tbody *ngIf="followers.length > 0; else noFollowing">
+          <tr *ngFor="let follower of followers">
+            <td>{{follower.name}}</td>
+          </tr>
+          <ng-template #noFollowing>
+            <tr>
+              following: 0
+            </tr>
+          </ng-template>
+          </tbody>
+        </table>
       </div>
-      <ng-template #noFollowers>
-         followers: 0
-      </ng-template>
     </div>
   </div>
 

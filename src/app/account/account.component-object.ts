@@ -9,9 +9,9 @@ export class Account {
   public picture: String;
   public website: String;
 
-  constructor(username: String, email: String, bio: String, location: String, password: String,
+  constructor(name: String, email: String, bio: String, location: String, password: String,
               picture: String, website: String) {
-    this.name = username;
+    this.name = name;
     this.email = email;
     this.bio = bio;
     this.location = location;
@@ -25,8 +25,8 @@ export class Account {
     return this.name;
   }
 
-  setUsername(username: String) {
-    this.name = username;
+  setUsername(name: String) {
+    this.name = name;
   }
 
   getEmail() {

@@ -7,6 +7,7 @@ import { Tweet } from './tweet.component-object';
 import { TweetService } from '../service/tweet.service';
 
 import { Observable } from 'rxjs/Observable';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account',
@@ -23,6 +24,7 @@ export class AccountComponent {
 
   accounts: Account[];
   account: Account;
+  tempAccount: Account;
 
   following: Account[];
   followers: Account[];
@@ -33,15 +35,23 @@ export class AccountComponent {
   tweet: Tweet;
 
   name: String;
+  body: String;
 
-  constructor(private accountService: AccountService, private tweetService: TweetService) {
-    this.name = 'ricardo';
+  constructor(private accountService: AccountService, private tweetService: TweetService, private router: Router) {
+    this.body = JSON.parse(localStorage.getItem('currentUser'));
 
-    this.getUsers();
-    this.getUser(this.name);
-    this.getTweetsFromUser(this.name);
-    this.getFollowing(this.name);
-    this.getFollowers(this.name);
+    if (this.body != null) {
+      this.name = this.body['name'];
+
+      this.getUsers();
+      this.getUser(this.name);
+      this.getTweetsFromUser(this.name);
+      this.getFollowing(this.name);
+      this.getFollowers(this.name);
+    }else {
+      this.router.navigate(['/login']);
+    }
+
   }
 
   /*
