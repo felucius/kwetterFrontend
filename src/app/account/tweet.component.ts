@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Tweet } from './tweet.component-object';
 import { TweetService } from '../service/tweet.service';
 import { Observable } from 'rxjs/Observable';
+import {AuthenticationService} from "../service/authentication.service";
 
 @Component({
   templateUrl: './account.component.html',
@@ -17,8 +18,9 @@ export class TweetComponent {
   tweets: Tweet[];
   tweet: Tweet;
 
-  constructor(private tweetService: TweetService) {
-    this.getTweetsFromUser('maxime');
+  constructor(private tweetService: TweetService, private authenticationService: AuthenticationService) {
+    const user = authenticationService.checklogin();
+    this.getTweetsFromUser(user);
   }
 
   getTweetsFromUser(name: String) {

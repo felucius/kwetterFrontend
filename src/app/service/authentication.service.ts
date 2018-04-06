@@ -12,7 +12,7 @@ export class AuthenticationService {
   public token: string;
   public user: Account;
   response: Response;
-
+  body: String;
   private loggedIn: String;//Subject<boolean> = new Subject<boolean>();
 
   // make isLoggedIn public readonly
@@ -32,6 +32,16 @@ export class AuthenticationService {
   public extractData(res: Response) {
     const body = res.json();
     return body;
+  }
+
+  checklogin(): String {
+    this.body = JSON.parse(localStorage.getItem('currentUser'));
+    if (this.body != null) {
+      const name = this.body['name'];
+      return name;
+    }else {
+      // Do nothing
+    }
   }
 
   login(name: string, password: string): Observable<Boolean> {
@@ -67,9 +77,9 @@ export class AuthenticationService {
 
   logout(): void {
     // clear token remove user from local storage to log user out
-    console.log(localStorage.getItem('currentUser'));
+    console.log('Token before remove: ' + localStorage.getItem('currentUser'));
     this.token = null;
     localStorage.removeItem('currentUser');
-    console.log(localStorage.getItem('currentUser'));
+    console.log('Token after remove: ' + localStorage.getItem('currentUser'));
   }
 }

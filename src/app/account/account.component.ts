@@ -40,14 +40,12 @@ export class AccountComponent {
   tweet: Tweet;
 
   name: String;
-  body: String;
 
-  constructor(private accountService: AccountService, private tweetService: TweetService, private router: Router) {
-    this.body = JSON.parse(localStorage.getItem('currentUser'));
+  constructor(private accountService: AccountService, private tweetService: TweetService, private router: Router,
+              authenticationService: AuthenticationService) {
 
-    if (this.body != null) {
-      this.name = this.body['name'];
-
+    this.name = authenticationService.checklogin();
+    if (this.name != null) {
       this.getUsers();
       this.getUser(this.name);
       this.getTweetsFromUser(this.name);

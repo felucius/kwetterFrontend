@@ -66,7 +66,7 @@
               <th scope="col">{{following.length}}</th>
             </tr>
             </thead>
-            <tbody *ngIf="following.length > 0; else noFollowing">
+            <tbody *ngIf="following.length > 0 && following.length != null; else noFollowing">
             <tr *ngFor="let follow of following">
               <td>{{follow.name}}</td>
             </tr>
@@ -88,7 +88,7 @@
             <th scope="col">{{followers.length}}</th>
           </tr>
           </thead>
-          <tbody *ngIf="followers.length > 0; else noFollowing">
+          <tbody *ngIf="followers.length > 0 && followers.length != null; else noFollowing">
           <tr *ngFor="let follower of followers">
             <td>{{follower.name}}</td>
           </tr>

@@ -16,10 +16,28 @@
 
   <div class="container-fluid text-center">
     <h1>{{name}}</h1>
+  </div>
+
+  <!--Timeline tweets-->
+  <div class="timeline container-fluid text-center col-md-6">
     <br>
-    <br>
-    <br>
-    <img width="300" src="../../assets/kwetterlogo.png">
+    <p>Tweets: {{tweetsfromfollowers.length}}</p>
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">Message</th>
+        <th scope="col">Published</th>
+        <th scope="col">Tags</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let tweetTimeline of tweetsfromfollowers">
+        <td>{{tweetTimeline.message}}</td>
+        <td>{{tweetTimeline.published}}</td>
+        <td>{{tweetTimeline.tags}}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 
   <br>
