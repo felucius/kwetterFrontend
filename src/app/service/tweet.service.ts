@@ -26,4 +26,9 @@ export class TweetService {
     return this.http.get('http://localhost:8080/KwetterBackend_Maxime/api/tweets/gettweetsfollowing/' + name)
       .map(this.extractData);
   }
+
+  getTweetLikesFromUser(tweetId: number): Observable<Tweet[]> {
+    return this.http.get('http://localhost:8080/KwetterBackend_Maxime/api/tweets/gettweetlikes/' + tweetId)
+      .map(this.extractData);
+  }
 }

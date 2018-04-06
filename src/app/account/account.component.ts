@@ -54,7 +54,6 @@ export class AccountComponent {
     }else {
       this.router.navigate(['/login']);
     }
-
   }
 
   /*

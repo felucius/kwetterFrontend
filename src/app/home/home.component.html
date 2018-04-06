@@ -19,7 +19,7 @@
   </div>
 
   <!--Timeline tweets-->
-  <div class="timeline container-fluid text-center col-md-6">
+  <div class="container-fluid text-center col-md-6">
     <br>
     <p>Tweets: {{tweetsfromfollowers.length}}</p>
     <table class="table">
@@ -28,6 +28,7 @@
         <th scope="col">Message</th>
         <th scope="col">Published</th>
         <th scope="col">Tags</th>
+        <th scope="col">Tweeted by</th>
       </tr>
       </thead>
       <tbody>
@@ -35,13 +36,35 @@
         <td>{{tweetTimeline.message}}</td>
         <td>{{tweetTimeline.published}}</td>
         <td>{{tweetTimeline.tags}}</td>
+        <td>{{tweetTimeline.tweetedBy.name}}
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!--Timeline mentions-->
+  <div class="container-fluid text-center col-md-6">
+    <br>
+    <p>Likes: {{tweetLikesFromUser.length}}</p>
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">Message</th>
+        <th scope="col">Published</th>
+        <th scope="col">Liked by</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let tweetTimelineLikes of tweetLikesFromUser">
+        <td>{{tweetTimelineLikes.message}}</td>
+        <td>{{tweetTimelineLikes.published}}</td>
+        <td>{{tweetTimelineLikes.likes[0].name}}</td>
       </tr>
       </tbody>
     </table>
   </div>
 
   <br>
-
   <router-outlet></router-outlet>
   </body>
 </html>

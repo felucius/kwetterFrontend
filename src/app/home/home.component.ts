@@ -24,12 +24,15 @@ export class HomeComponent {
   observableTweet: Observable<Tweet>;
   tweetsfromfollowers: Tweet[];
   tweet: Tweet;
+  observableTweetLikes: Observable<Tweet[]>;
+  tweetLikesFromUser: Tweet[];
 
   constructor(router: Router, private http: Http, private tweetService: TweetService, authenticationService: AuthenticationService) {
     this.router = router;
     const user = authenticationService.checklogin();
     if (user != null) {
       this.getTweetsFromFollowingUsers(user);
+      this.getTweetLikesFromUser(3);
     }else {
       this.router.navigate(['/login']);
     }
@@ -38,5 +41,10 @@ export class HomeComponent {
   getTweetsFromFollowingUsers(name: String) {
     this.observableTweets = this.tweetService.getTweetsFromFollowingUsers(name);
     this.observableTweets.subscribe(tweetsfromfollowers => this.tweetsfromfollowers = tweetsfromfollowers);
+  }
+
+  getTweetLikesFromUser(tweetId: number) {
+    this.observableTweetLikes = this.tweetService.getTweetLikesFromUser(tweetId);
+    this.observableTweetLikes.subscribe(tweetLikesFromUser => this.tweetLikesFromUser = tweetLikesFromUser);
   }
 }
