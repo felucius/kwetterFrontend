@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
+import {AuthenticationService} from "./service/authentication.service";
 
 @Component({
   selector: 'app-root',
@@ -12,9 +13,13 @@ export class AppComponent {
   profile = 'Profile';
   register = 'Register';
 
+  userLogedIn: String;
   router: Router;
 
-  constructor(router: Router) {
+  loggedIn: any;
+
+  constructor(router: Router, private authentication: AuthenticationService) {
     this.router = router;
+    this.loggedIn = this.authentication.isLoggedIn;
   }
 }

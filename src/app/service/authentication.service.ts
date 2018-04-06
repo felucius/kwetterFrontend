@@ -4,6 +4,8 @@ import {Http, Headers, Response, RequestOptions, ResponseOptions} from '@angular
 import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Observable';
 import {Account} from '../account/account.component-object';
+import { Subject } from 'rxjs/Subject';
+
 
 @Injectable()
 export class AuthenticationService {
@@ -11,10 +13,20 @@ export class AuthenticationService {
   public user: Account;
   response: Response;
 
+  private loggedIn: String;//Subject<boolean> = new Subject<boolean>();
+
+  // make isLoggedIn public readonly
+  get isLoggedIn() {
+    this.loggedIn = localStorage.getItem('currentUser');
+    return this.loggedIn;
+  }
+
   constructor(private http: Http) {
     // set token if saved in local storage
     //const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     //this.token = currentUser && currentUser.token;
+    //this.loggedIn.next(!!localStorage.getItem('currentUser'));
+    this.loggedIn = localStorage.getItem('currentUser');
   }
 
   public extractData(res: Response) {
@@ -32,11 +44,11 @@ export class AuthenticationService {
 
           // check user credentials and return fake jwt token if valid
           this.response = (new Response(
-            new ResponseOptions({ status: 200, body: { token: 'fake-jwt-token' } })
+            new ResponseOptions({ status: 200, body: { token: 'maxime-jwt-token' } })
           ));
 
         // login successful if there's a jwt token in the response
-        let token = response.json() && response.json().token;
+        const token = response.json() && response.json().token;
         if (!token) {
           // set token property
           this.token = token;
@@ -55,7 +67,9 @@ export class AuthenticationService {
 
   logout(): void {
     // clear token remove user from local storage to log user out
+    console.log(localStorage.getItem('currentUser'));
     this.token = null;
     localStorage.removeItem('currentUser');
+    console.log(localStorage.getItem('currentUser'));
   }
 }

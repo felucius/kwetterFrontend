@@ -9,6 +9,9 @@ import { TweetService } from '../service/tweet.service';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 
+import { AppComponent} from '../app.component';
+import {AuthenticationService} from "../service/authentication.service";
+
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
@@ -17,6 +20,9 @@ import { Router } from '@angular/router';
 })
 
 export class AccountComponent {
+  logoutUser: AuthenticationService;
+
+
   title = 'Account page';
 
   observableAccounts: Observable<Account[]>;
@@ -24,7 +30,6 @@ export class AccountComponent {
 
   accounts: Account[];
   account: Account;
-  tempAccount: Account;
 
   following: Account[];
   followers: Account[];
