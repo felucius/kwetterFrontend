@@ -1,4 +1,6 @@
 
+import {Account} from "./account.component-object";
+
 export class Tweet {
   // Fields
   public id: number;

@@ -1,6 +1,9 @@
 
+import {Tweet} from './tweet.component-object';
+
 export class Account {
   // Fields
+  public id: number;
   public name: String;
   public email: String;
   public bio: String;
@@ -8,6 +11,7 @@ export class Account {
   public password: String;
   public picture: String;
   public website: String;
+  public tweets: Tweet[];
 
   constructor(name: String, email: String, bio: String, location: String, password: String,
               picture: String, website: String) {
@@ -20,6 +24,21 @@ export class Account {
     this.website = website;
   }
 
+  setId(id: number) {
+    this.id = id;
+  }
+
+  getId() {
+    return this.id;
+  }
+
+  setTweets(tweets: Tweet[]) {
+    this.tweets = tweets;
+  }
+
+  getTweets() {
+    return this.tweets;
+  }
 
   getUsername() {
     return this.name;

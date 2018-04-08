@@ -37,6 +37,11 @@ export class AccountService {
       .map(this.extractData);
   }
 
+  getTweetMentions(tweetId: number): Observable<Account[]> {
+    return this.http.get('http://localhost:8080/KwetterBackend_Maxime/api/tweets/gettweetmentions/' + tweetId)
+      .map(this.extractData);
+  }
+
   // Add user
   create(user: Account): Observable<Account> {
     const headers = new Headers({ 'Content-Type': 'application/json' });
