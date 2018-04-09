@@ -45,9 +45,6 @@ export class AuthenticationService {
   }
 
   login(name: string, password: string): Observable<Boolean> {
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    const options = new RequestOptions({ headers: headers });
-
     this.user = new Account(name, null, null, null, password, null, null);
     return this.http.post('http://localhost:8080/KwetterBackend_Maxime/api/users/login', this.user)
       .map((response: Response) => {

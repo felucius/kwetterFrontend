@@ -49,7 +49,7 @@
       <tr *ngFor="let tweet of tweets; let i = index">
         <td>{{tweet.message}}</td>
         <td>{{tweet.published}}</td>
-        <td>{{tweet.tags}}</td>
+        <td>{{tweet.tag}}</td>
         <td><button class="btn btn-outline-light" (click)="editTweet(tweet)">edit</button></td>
         <td><button class="btn btn-outline-light" (click)="removeTweet(tweet)">remove</button></td>
       </tr>

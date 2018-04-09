@@ -40,20 +40,8 @@ export class TweetService {
 
     const date = new Date();
 
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDay() + 1;
-    const hour = date.getHours();
-    const minute = date.getMinutes();
-    const seconds = date.getSeconds();
-
-    console.log(year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + seconds);
-
-    const newDate = year + '-' + '0' + month + '-' + '0' + day + 'T' + hour + ':' + minute + ':' + seconds + '.288Z[UTC]';
-
-
     // Setting the date to the created tweet.
-    tweet.published  = newDate;
+    tweet.published  = date.toISOString();
     // Setting tweetedby with the account reference.
     tweet.tweetedBy = account;
 
@@ -79,6 +67,11 @@ export class TweetService {
     const options = new RequestOptions({ headers: headers });
 
     return this.http.post('http://localhost:8080/KwetterBackend_Maxime/api/users/removetweet', tweet)
+      .map(this.extractData);
+  }
+
+  searchTweetByTag(tag: String): Observable<Tweet[]> {
+    return this.http.get('http://localhost:8080/KwetterBackend_Maxime/api/tweets/findtagbycontent/' + tag)
       .map(this.extractData);
   }
 }

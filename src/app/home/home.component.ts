@@ -34,6 +34,7 @@ export class HomeComponent {
   tweetLikesFromUser: Tweet[];
   tweetMentions: Account[];
   tweets: Tweet[];
+  searchTweets: Tweet[];
 
   observableAccount: Observable<Account>;
   account: Account;
@@ -92,5 +93,10 @@ export class HomeComponent {
   getTweetsFromUser(name: String) {
     this.observableTweets = this.tweetService.getTweetsFromUser(name);
     this.observableTweets.subscribe(tweets => this.tweets = tweets);
+  }
+
+  searchTweetByTag(tag: String) {
+    this.observableTweets = this.tweetService.searchTweetByTag(tag);
+    this.observableTweets.subscribe(searchTweets => this.searchTweets = searchTweets);
   }
 }

@@ -1,19 +1,19 @@
 
-import {Account} from "./account.component-object";
+import {Account} from './account.component-object';
 
 export class Tweet {
   // Fields
   public id: number;
   public message: String;
   public published: String;
-  public tags: String[];
+  public tag: String;
   public likes: Account[];
   public tweetedBy: Account;
 
-  constructor(message: String, published: String, tags: String[]) {
+  constructor(message: String, published: String, tag: String) {
     this.message = message;
     this.published = published;
-    this.tags = tags;
+    this.tag = tag;
   }
 
   setTweetedBy(tweetedBy: Account) {
@@ -56,11 +56,11 @@ export class Tweet {
     return this.published;
   }
 
-  setTags(tags: String[]) {
-    this.tags = tags;
+  setTags(tag: String) {
+    this.tag = tag;
   }
 
   getTags() {
-    return this.tags;
+    return this.tag;
   }
 }
