@@ -38,9 +38,16 @@ export class TweetService {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
 
-    const date = new Date();
+    // Looking for hashtags
+    if (tweet.message.indexOf('#') > 0) {
+      const message = tweet.message.substring(tweet.message.indexOf('#'), tweet.message.length);
+      tweet.tag = message;
+      const replacedMessage = tweet.message.replace(message, ' ');
+      tweet.message = replacedMessage;
+    }
 
     // Setting the date to the created tweet.
+    const date = new Date();
     tweet.published  = date.toISOString();
     // Setting tweetedby with the account reference.
     tweet.tweetedBy = account;
