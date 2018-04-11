@@ -10,6 +10,7 @@ import {AuthenticationService} from "./service/authentication.service";
 export class AppComponent {
   title = 'Kwetter';
   home = 'Home';
+  users = 'Profiles';
   profile = 'Profile';
   register = 'Register';
 

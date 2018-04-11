@@ -28,6 +28,7 @@ import {AuthenticationService} from './service/authentication.service';
 import {AlertService} from './service/alert.service';
 
 import {AccountService} from './service/account.service';
+import {UsersComponent} from './users/users.component';
 
 const appRoutes: Routes = [
   {
@@ -47,6 +48,10 @@ const appRoutes: Routes = [
     component: AccountComponent
   },
   {
+    path: 'users',
+    component: UsersComponent
+  },
+  {
     path: '',
     redirectTo: '',
     pathMatch: 'full'
@@ -60,7 +65,8 @@ const appRoutes: Routes = [
     RegistrationComponent,
     AccountComponent,
     TweetComponent,
-    LoginComponent
+    LoginComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,

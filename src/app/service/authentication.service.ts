@@ -40,8 +40,6 @@ export class AuthenticationService {
       // login successful if there's a jwt token in the response
       const token = res.text();
       if (token != null) {
-        //const name = JSON.parse(localStorage.getItem('currentUser'));
-        //localStorage.removeItem('currentUser');
         // store username and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('currentUser', JSON.stringify({ token: token }));
         // return true to indicate successful login
@@ -54,12 +52,13 @@ export class AuthenticationService {
 
   checklogin(): String {
     const token = localStorage.getItem('currentUser');
-    const tokenPayload = jwt_decode(token);
-    this.name = tokenPayload.sub;
-    if (this.name != null) {
+
+    if (token != null) {
+      const tokenPayload = jwt_decode(token);
+      this.name = tokenPayload.sub;
       return this.name;
     }else {
-      // Do nothing
+      return null;
     }
   }
 

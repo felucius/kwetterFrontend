@@ -54,13 +54,6 @@ export class AccountComponent {
     }
   }
 
-  /*
-  User related calls.
-   */
-  getUsers() {
-    this.observableAccounts = this.accountService.getUsers();
-    this.observableAccounts.subscribe(accounts => this.accounts = accounts);
-  }
 
   getUser(name: String) {
     this.observableAccount = this.accountService.getUser(name);
