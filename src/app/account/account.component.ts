@@ -7,7 +7,7 @@ import { TweetService } from '../service/tweet.service';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../service/authentication.service';
-
+import * as jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-account',
@@ -39,6 +39,7 @@ export class AccountComponent {
               authenticationService: AuthenticationService) {
 
     this.name = authenticationService.checklogin();
+
     if (this.name != null) {
       this.getUser(this.name);
       this.getTweetsFromUser(this.name);

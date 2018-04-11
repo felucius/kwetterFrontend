@@ -4,7 +4,7 @@ import {Http, Headers, Response, RequestOptions, ResponseOptions} from '@angular
 import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Observable';
 import {Account} from '../account/account.component-object';
-import { Subject } from 'rxjs/Subject';
+import * as jwt_decode from 'jwt-decode';
 
 
 @Injectable()
@@ -13,6 +13,8 @@ export class AuthenticationService {
   public user: Account;
   response: Response;
   body: String;
+  name: String;
+  generatedToken;
   private loggedIn: String;//Subject<boolean> = new Subject<boolean>();
 
   // make isLoggedIn public readonly
@@ -34,42 +36,50 @@ export class AuthenticationService {
     return body;
   }
 
+  public extractToken(res: Response) {
+      // login successful if there's a jwt token in the response
+      const token = res.text();
+      if (token != null) {
+        //const name = JSON.parse(localStorage.getItem('currentUser'));
+        //localStorage.removeItem('currentUser');
+        // store username and jwt token in local storage to keep user logged in between page refreshes
+        localStorage.setItem('currentUser', JSON.stringify({ token: token }));
+        // return true to indicate successful login
+        return token;
+      } else {
+        // return false to indicate failed login
+        return null;
+      }
+  }
+
   checklogin(): String {
-    this.body = JSON.parse(localStorage.getItem('currentUser'));
-    if (this.body != null) {
-      const name = this.body['name'];
-      return name;
+    const token = localStorage.getItem('currentUser');
+    const tokenPayload = jwt_decode(token);
+    this.name = tokenPayload.sub;
+    if (this.name != null) {
+      return this.name;
     }else {
       // Do nothing
     }
   }
 
-  login(name: string, password: string): Observable<Boolean> {
+  login(name: string, password: string): Observable<Account> {
     this.user = new Account(name, null, null, null, password, null, null);
     return this.http.post('http://localhost:8080/KwetterBackend_Maxime/api/users/login', this.user)
       .map((response: Response) => {
-
-          // check user credentials and return fake jwt token if valid
-          this.response = (new Response(
-            new ResponseOptions({ status: 200, body: { token: 'maxime-jwt-token' } })
-          ));
-
-        // login successful if there's a jwt token in the response
-        const token = response.json() && response.json().token;
-        if (!token) {
-          // set token property
-          this.token = token;
-
-          // store username and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify({ name: name, token: token }));
-          console.log('GEN token: ' + localStorage.getItem('currentUser'));
-          // return true to indicate successful login
-          return true;
-        } else {
-          // return false to indicate failed login
-          return false;
+        this.user = response.json();
+        if (this.user != null) {
+          //localStorage.setItem('currentUser', JSON.stringify({ name: name}));
+          return this.user;
+        }else {
+          return null;
         }
       });
+  }
+
+  generateToken(user: Account): Observable<String> {
+    return this.http.post('http://localhost:8080/KwetterBackend_Maxime/api/authentication/generatetoken', user)
+      .map(this.extractToken);
   }
 
   logout(): void {
