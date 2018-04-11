@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <title>Users</title>
 </head>
-<body>
+<body class="bg-light text-light">
   <div class="container text-center">
     <div class="row">
       <div *ngFor="let account of accounts" class="col">
-        <div class="card bg-light" style="width: 18rem;">
+        <div class="card bg-primary" style="width: 18rem;">
           <img class="rounded mx-auto d-block" src="../../assets/avatarmen.png" width="45%">
           <div class="card-body">
             <h5 class="card-title">{{account.name}}</h5>
-            <a href="#" class="btn btn-primary">visit my account</a>
+            <a href="#/profile" class="btn btn-outline-light">visit my account</a>
           </div>
         </div>
         <br>

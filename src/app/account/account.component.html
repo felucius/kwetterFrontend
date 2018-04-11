@@ -10,21 +10,35 @@
 
   <!--S0 Profiel foto en naam-->
   <div class="container">
-    <h2 class="text-center">Profile</h2>
     <br>
-    <div class="row justify-content-center">
-      <div class="name col text-center">
-        <img class="img-responsive" src="../../assets/avatarmen.png" width="45%">
-        <p>name: {{account.name}}</p>
+    <!--Profiel details S0-->
+    <div class="row">
+      <div class="card bg-light text-center" style="width: 18rem;">
+        <img class="card-img-top" src="../../assets/avatarmen.png">
+        <div class="card-body">
+          <h5 class="card-title">{{account.name}}</h5>
+          <p class="card-text">{{account.bio}}</p>
+          <p class="card-text">{{account.location}}</p>
+          <p class="card-text">{{account.website}}</p>
+          <button class="btn btn-primary" routerLink="/login" onclick="logout()">Logout</button>
+        </div>
       </div>
 
-      <!--S1 Profiel details-->
-      <div class="personalinformation col justify-content-center text-center">
-        <p>bio: {{account.bio}}</p>
-        <p>email: {{account.email}}</p>
-        <p>location: {{account.location}}</p>
-        <p>website: {{account.website}}</p>
-        <button class="btn btn-outline-light " routerLink="/login" onclick="logout()">Logout</button>
+      <div class="col">
+        <!--S2 Eigen tweets-->
+        <div class="row">
+          <div *ngFor="let tweet of tweets" class="col">
+            <div class="card bg-light text-center">
+              <div class="card-body">
+                <h5 class="card-title">{{tweet.message}}</h5>
+                <p class="card-text">{{tweet.published}}</p>
+                <p class="card-text">{{tweet.tag}}</p>
+                <button class="btn btn-outline-primary" (click)="editTweet(tweet)">edit</button>
+                <button class="btn btn-outline-primary" (click)="removeTweet(tweet)">remove</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <br>
@@ -32,80 +46,49 @@
 
   <br>
 
-  <!--S2 Eigen tweets-->
-  <div class="container">
-    <h2 class="text-center">Messages</h2>
-    <table class="table">
-      <thead>
-      <tr>
-        <th scope="col">Message</th>
-        <th scope="col">Published</th>
-        <th scope="col">Tags</th>
-        <th scope="col">Edit</th>
-        <th scope="col">Remove</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let tweet of tweets; let i = index">
-        <td>{{tweet.message}}</td>
-        <td>{{tweet.published}}</td>
-        <td>{{tweet.tag}}</td>
-        <td><button class="btn btn-outline-light" (click)="editTweet(tweet)">edit</button></td>
-        <td><button class="btn btn-outline-light" (click)="removeTweet(tweet)">remove</button></td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-
   <!--S3 + S4 Following & Followers-->
   <div class="container">
-    <div class="row">
-
-      <!--S3 Following-->
-      <div class="col text-center">
-        <h2 class="text-center">Following</h2>
-          <table class="table">
-            <thead>
-            <tr>
-              <th scope="col">{{following.length}}</th>
-            </tr>
-            </thead>
-            <tbody *ngIf="following.length > 0 && following.length != null; else noFollowing">
-            <tr *ngFor="let follow of following">
-              <td>{{follow.name}}</td>
-            </tr>
-            <ng-template #noFollowing>
-              <tr>
-                following: 0
-              </tr>
-            </ng-template>
-            </tbody>
-          </table>
+    <!--S3 Following-->
+    <h2 class="text-center">Following</h2>
+    <div *ngIf="following.length > 0 && following.length != null; else noFollowing" class="row">
+      <div *ngFor="let follow of following" class="col">
+        <div class="card bg-light text-center">
+          <img class="rounded mx-auto d-block" src="../../assets/avatarmen.png" width="20%">
+          <div class="card-body">
+            <h5 class="card-title">{{follow.name}}</h5>
+            <a href="#/profile" class="btn btn-outline-primary">visit my account</a>
+          </div>
+        </div>
       </div>
-
-      <!--S4 Followers-->
-      <div class="col text-center">
-        <h2 class="text-center">Followers</h2>
-        <table class="table">
-          <thead>
-          <tr>
-            <th scope="col">{{followers.length}}</th>
-          </tr>
-          </thead>
-          <tbody *ngIf="followers.length > 0 && followers.length != null; else noFollowing">
-          <tr *ngFor="let follower of followers">
-            <td>{{follower.name}}</td>
-          </tr>
-          <ng-template #noFollowing>
-            <tr>
-              following: 0
-            </tr>
-          </ng-template>
-          </tbody>
-        </table>
-      </div>
+      <ng-template #noFollowing>
+        <p>
+          following: 0
+        </p>
+      </ng-template>
     </div>
+    <br>
   </div>
 
-</body>
+  <div class="container">
+    <!--S4 Followers-->
+    <h2 class="text-center">Followers</h2>
+    <div *ngIf="followers.length > 0 && followers.length != null; else noFollowers" class="row">
+      <div *ngFor="let follower of followers" class="col">
+        <div class="card bg-light text-center">
+          <img class="rounded mx-auto d-block" src="../../assets/avatarmen.png" width="20%">
+          <div class="card-body">
+            <h5 class="card-title">{{follower.name}}</h5>
+            <a href="#/profile" class="btn btn-outline-primary">visit my account</a>
+          </div>
+        </div>
+      </div>
+      <ng-template #noFollowing>
+        <p>
+          following: 0
+        </p>
+      </ng-template>
+    </div>
+    <br>
+  </div>
+  </body>
 </html>
