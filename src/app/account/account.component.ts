@@ -18,6 +18,7 @@ import * as jwt_decode from 'jwt-decode';
 
 export class AccountComponent {
   title = 'Account page';
+  model: any = {};
 
   observableAccounts: Observable<Account[]>;
   observableAccount: Observable<Account>;
@@ -34,6 +35,7 @@ export class AccountComponent {
   tweet: Tweet;
 
   name: String;
+  tempAuthenticationService: AuthenticationService;
 
   constructor(private accountService: AccountService, private tweetService: TweetService, private router: Router,
               authenticationService: AuthenticationService) {
@@ -98,5 +100,18 @@ export class AccountComponent {
     } else {
       // Canceled.
     }
+  }
+
+  editAccount() {
+    this.account.email = this.model.email;
+    this.account.bio = this.model.bio;
+    this.account.location = this.model.location;
+    this.account.website = this.model.website;
+    this.accountService.editUser(this.account)
+      .subscribe(account => {
+        if (account != null) {
+          console.log('Account edited: ' + account);
+        }
+      });
   }
 }

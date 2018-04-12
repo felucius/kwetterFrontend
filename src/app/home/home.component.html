@@ -22,7 +22,8 @@
   <div class="container-fluid bg-light">
     <div class="row justify-content-around">
       <form class="form-inline my-2 my-lg-0">
-        <input #tagSearch class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" (input)="searchTweetByTag($event.target.value)">
+        <input #tagSearch class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+               (input)="searchTweetByTag($event.target.value)">
       </form>
 
       <div class="container-fluid text-center">
@@ -47,36 +48,34 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <form name="form" (ngSubmit)="f.form.valid && addMessage()" #f="ngForm" novalidate>
-          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !message.valid }">
-            <label for="message">Message</label>
-            <input type="text" class="form-control" name="message" [(ngModel)]="model.message" #name="ngModel" required />
-            <div *ngIf="f.submitted && !message.valid" class="help-block">Message is required</div>
+        <div class="card bg-primary text-center text-white">
+          <div class="card-body">
+            <form name="form" (ngSubmit)="f.form.valid && addMessage()" #f="ngForm" novalidate>
+              <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !message.valid }">
+                <label for="message">Message</label>
+                <input type="text" class="form-control" name="message" [(ngModel)]="model.message" #name="ngModel" required />
+                <div *ngIf="f.submitted && !message.valid" class="help-block">Message is required</div>
+              </div>
+              <div class="form-group">
+                <button [disabled]="loading" class="btn btn-outline-light">Add Kweet</button>
+                <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+              </div>
+              <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+            </form>
           </div>
-          <div class="form-group">
-            <button [disabled]="loading" class="btn btn-outline-light">Add Kweet</button>
-            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-          </div>
-          <div *ngIf="error" class="alert alert-danger">{{error}}</div>
-        </form>
+        </div>
       </div>
 
       <div class="col">
-        <p>My latest tweet</p>
-        <table class="table">
-          <thead>
-          <tr>
-            <th scope="col">Tweeted by</th>
-            <th scope="col">Message</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let tweet of tweets; let last = last">
-            <td *ngIf="last">{{tweet.tweetedBy.name}}
-            <td *ngIf="last">{{tweet.message}}</td>
-          </tr>
-          </tbody>
-        </table>
+        <h3 class="text-center">My latest tweet</h3>
+
+        <div class="col">
+          <div class="card bg-primary text-center text-white">
+            <div class="card-body">
+              <p class="card-text">{{tweets.reverse()[0].message}}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -84,42 +83,31 @@
     <div class="row">
       <div class="col">
         <br>
-        <p>Tweets: {{tweetsfromfollowers.length}}</p>
-        <table class="table">
-          <thead>
-          <tr>
-            <th scope="col">Tweeted by</th>
-            <th scope="col">Message</th>
-            <th scope="col">Published</th>
-            <th scope="col">Tags</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let tweetTimeline of tweetsfromfollowers">
-            <td>{{tweetTimeline.tweetedBy.name}}
-            <td>{{tweetTimeline.message}}</td>
-            <td>{{tweetTimeline.published}}</td>
-            <td>{{tweetTimeline.tag}}</td>
-          </tr>
-          </tbody>
-        </table>
+        <h3 class="text-center">Tweets: {{tweetsfromfollowers.length}}</h3>
+
+        <div *ngFor="let tweetTimeline of tweetsfromfollowers" class="col">
+          <div class="card bg-primary text-center text-white">
+            <div class="card-body">
+              <h5 class="card-title">{{tweetTimeline.message}}</h5>
+              <p class="card-text">{{tweetTimeline.tweetedBy.name}}</p>
+              <p class="card-text">{{tweetTimeline.published}}</p>
+              <p class="card-text">{{tweetTimeline.tag}}</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!--Gerating trends based on followers tags written in a tweet-->
       <div class="col">
-        <p>My trends</p>
-        <table class="table">
-          <thead>
-          <tr>
-            <th scope="col">Tags</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let tweet of tweetsfromfollowers">
-            <td>{{tweet.tag}}</td>
-          </tr>
-          </tbody>
-        </table>
+        <h3 class="text-center">My trends</h3>
+
+        <div *ngFor="let tweet of tweetsfromfollowers" class="col">
+          <div class="card bg-primary text-center text-white">
+            <div class="card-body">
+              <h5 class="card-title">{{tweet.tag}}</h5>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 

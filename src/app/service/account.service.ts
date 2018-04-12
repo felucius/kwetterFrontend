@@ -44,10 +44,12 @@ export class AccountService {
 
   // Add user
   create(user: Account): Observable<Account> {
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    const options = new RequestOptions({ headers: headers });
-
     return this.http.post('http://localhost:8080/KwetterBackend_Maxime/api/users/createuser', user)
+      .map(this.extractData);
+  }
+
+  editUser(user: Account): Observable<Account> {
+    return this.http.post('http://localhost:8080/KwetterBackend_Maxime/api/users/updateuser', user)
       .map(this.extractData);
   }
 }

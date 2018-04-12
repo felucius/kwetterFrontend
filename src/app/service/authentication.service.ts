@@ -68,7 +68,6 @@ export class AuthenticationService {
       .map((response: Response) => {
         this.user = response.json();
         if (this.user != null) {
-          //localStorage.setItem('currentUser', JSON.stringify({ name: name}));
           return this.user;
         }else {
           return null;

@@ -40,11 +40,11 @@ export class Account {
     return this.tweets;
   }
 
-  getUsername() {
+  getName() {
     return this.name;
   }
 
-  setUsername(name: String) {
+  setName(name: String) {
     this.name = name;
   }
 

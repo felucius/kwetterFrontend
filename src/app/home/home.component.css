@@ -1,7 +1,5 @@
-.container {
-  background-color: dodgerblue;
-  color: white;
-  font-weight: bold;
-  width: 75%;
+.card {
+  width: 100%;
+  height: 100%;
+  margin: 1%;
 }
-

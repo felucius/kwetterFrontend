@@ -3,8 +3,8 @@ import {Component} from '@angular/core';
 import {AccountService} from '../service/account.service';
 import {Observable} from 'rxjs/Observable';
 import {Account} from '../account/account.component-object';
-import {AuthenticationService} from "../service/authentication.service";
-import {Router} from "@angular/router";
+import {AuthenticationService} from '../service/authentication.service';
+import {Router} from '@angular/router';
 
 @Component({
   templateUrl: './users.component.html',

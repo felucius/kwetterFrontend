@@ -14,21 +14,22 @@ import { TweetComponent } from './account/tweet.component';
 import { LoginComponent } from './login/login.component';
 
 // Import smart routing
-import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 // Import HttpClient
-import {BaseRequestOptions, HttpModule} from '@angular/http';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { BaseRequestOptions, HttpModule } from '@angular/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 // Import form module
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Import authentication
-import {AuthenticationService} from './service/authentication.service';
-import {AlertService} from './service/alert.service';
+import { AuthenticationService } from './service/authentication.service';
+import { AlertService } from './service/alert.service';
 
-import {AccountService} from './service/account.service';
-import {UsersComponent} from './users/users.component';
+import { AccountService } from './service/account.service';
+import { UsersComponent } from './users/users.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const appRoutes: Routes = [
   {
@@ -66,7 +67,7 @@ const appRoutes: Routes = [
     AccountComponent,
     TweetComponent,
     LoginComponent,
-    UsersComponent
+    UsersComponent,
   ],
   imports: [
     BrowserModule,

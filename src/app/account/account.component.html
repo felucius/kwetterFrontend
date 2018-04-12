@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
   <div class="container-fluid text-center">
@@ -16,11 +17,57 @@
       <div class="card bg-light text-center" style="width: 18rem;">
         <img class="card-img-top" src="../../assets/avatarmen.png">
         <div class="card-body">
-          <h5 class="card-title">{{account.name}}</h5>
-          <p class="card-text">{{account.bio}}</p>
-          <p class="card-text">{{account.location}}</p>
-          <p class="card-text">{{account.website}}</p>
+          <h5 class="card-title">name: {{account.name}}</h5>
+          <p class="card-text">bio: {{account.bio}}</p>
+          <p class="card-text">location: {{account.location}}</p>
+          <p class="card-text">location: {{account.email}}</p>
+          <p class="card-text">website: {{account.website}}</p>
           <button class="btn btn-primary" routerLink="/login" onclick="logout()">Logout</button>
+          <button class="btn btn-outline-primary"
+                  onclick="document.getElementById('id01').style.display='block'">Edit account</button>
+        </div>
+      </div>
+
+      <div id="id01" class="w3-modal">
+        <div class="w3-modal-content">
+          <header class="w3-container bg-primary text-center text-white">
+        <span onclick="document.getElementById('id01').style.display='none'"
+              class="w3-button w3-display-topright">&times;</span>
+            <h2>Edit account settings</h2>
+          </header>
+          <div class="w3-container">
+
+            <form name="form" (ngSubmit)="f.form.valid && editAccount()" #f="ngForm" novalidate>
+
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" id="email" name="email" [(ngModel)]="model.email" #name="ngModel" required>
+              </div>
+
+              <div class="form-group">
+                <label for="bio">Bio</label>
+                <input type="text" class="form-control" id="bio" name="bio" [(ngModel)]="model.bio" #bio="ngModel" required>
+              </div>
+
+              <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" class="form-control" id="location" name="location" [(ngModel)]="model.location" #location="ngModel" required>
+              </div>
+
+              <div class="form-group">
+                <label for="website">Website</label>
+                <input type="text" class="form-control" id="website" name="website" [(ngModel)]="model.website" #website="ngModel" required>
+              </div>
+
+              <div class="form-group text-center text-white">
+                <button [disabled]="loading" class="btn btn-primary">Save settings</button>
+              </div>
+            </form>
+
+          </div>
+          <footer class="w3-container bg-primary text-center text-white">
+            <p>Account {{account.name}}</p>
+          </footer>
         </div>
       </div>
 
