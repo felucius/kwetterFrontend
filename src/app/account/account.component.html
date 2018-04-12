@@ -6,7 +6,7 @@
 </head>
 <body>
   <div class="container-fluid text-center">
-    <h1>{{title}}</h1>
+    <h1>{{title}} of {{account.name}}</h1>
   </div>
 
   <!--S0 Profiel foto en naam-->
@@ -20,7 +20,7 @@
           <h5 class="card-title">name: {{account.name}}</h5>
           <p class="card-text">bio: {{account.bio}}</p>
           <p class="card-text">location: {{account.location}}</p>
-          <p class="card-text">location: {{account.email}}</p>
+          <p class="card-text">email: {{account.email}}</p>
           <p class="card-text">website: {{account.website}}</p>
           <button class="btn btn-primary" routerLink="/login" onclick="logout()">Logout</button>
           <button class="btn btn-outline-primary"

@@ -1,4 +1,3 @@
-
 import {Component} from '@angular/core';
 import {AccountService} from '../service/account.service';
 import {Observable} from 'rxjs/Observable';
@@ -9,7 +8,7 @@ import {Router} from '@angular/router';
 @Component({
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css'],
-  providers: [ AccountService ]
+  providers: [AccountService]
 })
 
 export class UsersComponent {
@@ -17,7 +16,6 @@ export class UsersComponent {
 
   observableAccounts: Observable<Account[]>;
   accounts: Account[];
-
   name: String;
 
   constructor(private router: Router, private accountService: AccountService,
@@ -25,7 +23,7 @@ export class UsersComponent {
     this.name = authenticationService.checklogin();
     if (this.name != null) {
       this.getUsers();
-    }else {
+    } else {
       this.router.navigate(['/login']);
     }
   }
@@ -38,4 +36,10 @@ export class UsersComponent {
     this.observableAccounts.subscribe(accounts => this.accounts = accounts);
   }
 
+  visitUser(name: String) {
+    if (name != null) {
+      localStorage.setItem('otherUser', name.toString());
+      this.router.navigate(['/otheruser']);
+    }
+  }
 }

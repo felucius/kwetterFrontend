@@ -30,6 +30,7 @@ import { AlertService } from './service/alert.service';
 import { AccountService } from './service/account.service';
 import { UsersComponent } from './users/users.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { OtheruserComponent } from './otheruser/otheruser.component';
 
 const appRoutes: Routes = [
   {
@@ -49,8 +50,12 @@ const appRoutes: Routes = [
     component: AccountComponent
   },
   {
-    path: 'users',
+    path: 'profiles',
     component: UsersComponent
+  },
+  {
+    path: 'otheruser',
+    component: OtheruserComponent
   },
   {
     path: '',
@@ -68,6 +73,7 @@ const appRoutes: Routes = [
     TweetComponent,
     LoginComponent,
     UsersComponent,
+    OtheruserComponent
   ],
   imports: [
     BrowserModule,

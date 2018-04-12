@@ -1,5 +1,4 @@
-
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Http, Headers, Response, RequestOptions, ResponseOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Observable';
@@ -37,17 +36,17 @@ export class AuthenticationService {
   }
 
   public extractToken(res: Response) {
-      // login successful if there's a jwt token in the response
-      const token = res.text();
-      if (token != null) {
-        // store username and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('currentUser', JSON.stringify({ token: token }));
-        // return true to indicate successful login
-        return token;
-      } else {
-        // return false to indicate failed login
-        return null;
-      }
+    // login successful if there's a jwt token in the response
+    const token = res.text();
+    if (token != null) {
+      // store username and jwt token in local storage to keep user logged in between page refreshes
+      localStorage.setItem('currentUser', JSON.stringify({token: token}));
+      // return true to indicate successful login
+      return token;
+    } else {
+      // return false to indicate failed login
+      return null;
+    }
   }
 
   checklogin(): String {
@@ -57,7 +56,7 @@ export class AuthenticationService {
       const tokenPayload = jwt_decode(token);
       this.name = tokenPayload.sub;
       return this.name;
-    }else {
+    } else {
       return null;
     }
   }
@@ -69,7 +68,7 @@ export class AuthenticationService {
         this.user = response.json();
         if (this.user != null) {
           return this.user;
-        }else {
+        } else {
           return null;
         }
       });

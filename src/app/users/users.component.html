@@ -12,7 +12,7 @@
           <img class="rounded mx-auto d-block" src="../../assets/avatarmen.png" width="45%">
           <div class="card-body">
             <h5 class="card-title">{{account.name}}</h5>
-            <a href="#/profile" class="btn btn-outline-light">visit my account</a>
+            <button class="btn btn-outline-light" (click)="visitUser(account.name)">visit me</button>
           </div>
         </div>
         <br>

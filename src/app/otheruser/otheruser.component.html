@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+<div class="container-fluid text-center">
+  <h1>{{title}} of {{otherAccount.name}}</h1>
+</div>
+
+<!--S0 Profiel foto en naam-->
+<div class="container">
+  <br>
+  <!--Profiel details S0-->
+  <div class="row">
+    <div class="card bg-light text-center" style="width: 18rem;">
+      <img class="card-img-top" src="../../assets/avatarmen.png">
+      <div class="card-body">
+        <h5 class="card-title">name: {{otherAccount.name}}</h5>
+        <p class="card-text">bio: {{otherAccount.bio}}</p>
+        <p class="card-text">location: {{otherAccount.location}}</p>
+        <p class="card-text">email: {{otherAccount.email}}</p>
+        <p class="card-text">website: {{otherAccount.website}}</p>
+        <button class="btn btn-outline-primary" (click)="followUser()">follow</button>
+        <button class="btn btn-outline-primary" (click)="unfollowUser()">unfollow</button>
+      </div>
+    </div>
+
+    <div class="col">
+      <!--S2 Eigen tweets-->
+      <div class="row">
+        <div *ngFor="let tweet of tweets" class="col">
+          <div class="card bg-light text-center">
+            <div class="card-body">
+              <h5 class="card-title">{{tweet.message}}</h5>
+              <p class="card-text">{{tweet.published}}</p>
+              <p class="card-text">{{tweet.tag}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+</div>
+
+<br>
+
+<!--S3 + S4 Following & Followers-->
+<div class="container">
+  <!--S3 Following-->
+  <h2 class="text-center">Following</h2>
+  <div *ngIf="following.length > 0 && following.length != null; else noFollowing" class="row">
+    <div *ngFor="let follow of following" class="col">
+      <div class="card bg-light text-center">
+        <img class="rounded mx-auto d-block" src="../../assets/avatarmen.png" width="20%">
+        <div class="card-body">
+          <h5 class="card-title">{{follow.name}}</h5>
+          <a href="#/profile" class="btn btn-outline-primary">visit my account</a>
+        </div>
+      </div>
+    </div>
+    <ng-template #noFollowing>
+      <p>
+        following: 0
+      </p>
+    </ng-template>
+  </div>
+  <br>
+</div>
+
+<div class="container">
+  <!--S4 Followers-->
+  <h2 class="text-center">Followers</h2>
+  <div *ngIf="followers.length > 0 && followers.length != null; else noFollowers" class="row">
+    <div *ngFor="let follower of followers" class="col">
+      <div class="card bg-light text-center">
+        <img class="rounded mx-auto d-block" src="../../assets/avatarmen.png" width="20%">
+        <div class="card-body">
+          <h5 class="card-title">{{follower.name}}</h5>
+          <a href="#/profile" class="btn btn-outline-primary">visit my account</a>
+        </div>
+      </div>
+    </div>
+    <ng-template #noFollowing>
+      <p>
+        following: 0
+      </p>
+    </ng-template>
+  </div>
+  <br>
+</div>
+
+</body>
+</html>
