@@ -57,7 +57,7 @@
         <img class="rounded mx-auto d-block" src="../../assets/avatarmen.png" width="20%">
         <div class="card-body">
           <h5 class="card-title">{{follow.name}}</h5>
-          <a href="#/profile" class="btn btn-outline-primary">visit my account</a>
+          <button class="btn btn-outline-primary" (click)="visitUser(follow.name)">visit me</button>
         </div>
       </div>
     </div>
@@ -79,7 +79,7 @@
         <img class="rounded mx-auto d-block" src="../../assets/avatarmen.png" width="20%">
         <div class="card-body">
           <h5 class="card-title">{{follower.name}}</h5>
-          <a href="#/profile" class="btn btn-outline-primary">visit my account</a>
+          <button class="btn btn-outline-primary" (click)="visitUser(follower.name)">visit me</button>
         </div>
       </div>
     </div>

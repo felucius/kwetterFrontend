@@ -35,7 +35,6 @@ export class AccountComponent {
   tweet: Tweet;
 
   name: String;
-  tempAuthenticationService: AuthenticationService;
 
   constructor(private accountService: AccountService, private tweetService: TweetService, private router: Router,
               authenticationService: AuthenticationService) {
@@ -113,5 +112,12 @@ export class AccountComponent {
           console.log('Account edited: ' + account);
         }
       });
+  }
+
+  visitUser(name: String) {
+    if (name != null) {
+      localStorage.setItem('otherUser', name.toString());
+      this.router.navigate(['/otheruser']);
+    }
   }
 }

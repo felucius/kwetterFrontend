@@ -16,7 +16,6 @@ import {AuthenticationService} from '../service/authentication.service';
 export class OtheruserComponent {
   title = 'Account page';
 
-  tempAccount: Account;
   otherAccount: Account;
   observableOtherAccount: Observable<Account>;
   name: String;
@@ -28,12 +27,14 @@ export class OtheruserComponent {
   tweet: Tweet;
   checkLoggedInUser: String;
 
+  location: Location;
+
   constructor(private accountService: AccountService, private router: Router, private tweetService: TweetService,
               private authenticationService: AuthenticationService) {
     this.name = localStorage.getItem('otherUser');
     if (name != null) {
       this.checkLoggedInUser = this.authenticationService.checklogin();
-      if (this.checkLoggedInUser != this.name) {
+      if (this.checkLoggedInUser !== this.name) {
         this.getUser(this.name);
         this.getTweetsFromUser(this.name);
         this.getFollowing(this.name);
@@ -66,5 +67,18 @@ export class OtheruserComponent {
   getTweetsFromUser(name: String) {
     this.observableTweets = this.tweetService.getTweetsFromUser(name);
     this.observableTweets.subscribe(tweets => this.tweets = tweets);
+  }
+
+  visitUser(name: String) {
+
+    if (name != null) {
+      localStorage.setItem('otherUser', name.toString());
+      this.router.navigate(['/otheruser']);
+      this.load();
+    }
+  }
+
+  load() {
+    window.location.reload(true);
   }
 }

@@ -4,11 +4,12 @@ import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { Account } from '../account/account.component-object';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class AccountService {
 
-  constructor (private http: Http) {
+  constructor (private http: Http, private router: Router) {
 
   }
 
