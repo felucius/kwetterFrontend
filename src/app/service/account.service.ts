@@ -53,4 +53,14 @@ export class AccountService {
     return this.http.post('http://localhost:8080/KwetterBackend_Maxime/api/users/updateuser', user)
       .map(this.extractData);
   }
+
+  followUser(username, userFollowing): Observable<Boolean> {
+    return this.http.post('http://localhost:8080/KwetterBackend_Maxime/api/users/followuser/' + username + '/' + userFollowing, username + '/' + userFollowing)
+      .map(this.extractData);
+  }
+
+  unFollowUser(username, userUnfollowing): Observable<Boolean> {
+    return this.http.post('http://localhost:8080/KwetterBackend_Maxime/api/users/unfollowuser/' + username + '/' + userUnfollowing, username + '/' + userUnfollowing)
+      .map(this.extractData);
+  }
 }

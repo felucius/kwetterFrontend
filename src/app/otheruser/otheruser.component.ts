@@ -18,16 +18,18 @@ export class OtheruserComponent {
 
   otherAccount: Account;
   observableOtherAccount: Observable<Account>;
-  name: String;
   following: Account[];
   followers: Account[];
   observableAccounts: Observable<Account[]>;
   observableTweets: Observable<Tweet[]>;
   tweets: Tweet[];
   tweet: Tweet;
-  checkLoggedInUser: String;
 
-  location: Location;
+  observableFollowing: Observable<Boolean>;
+  follower: Boolean;
+
+  name: String;
+  checkLoggedInUser: String;
 
   constructor(private accountService: AccountService, private router: Router, private tweetService: TweetService,
               private authenticationService: AuthenticationService) {
@@ -69,6 +71,16 @@ export class OtheruserComponent {
     this.observableTweets.subscribe(tweets => this.tweets = tweets);
   }
 
+  followUser(userName: String, userFollowing: String) {
+    this.observableFollowing = this.accountService.followUser(userName, userFollowing);
+    this.observableFollowing.subscribe(follower => this.follower = follower);
+  }
+
+  unFollowUser(userName: String, userUnfollowing: String) {
+    this.observableFollowing = this.accountService.unFollowUser(userName, userUnfollowing);
+    this.observableFollowing.subscribe(follower => this.follower = follower);
+  }
+
   visitUser(name: String) {
 
     if (name != null) {
@@ -78,6 +90,7 @@ export class OtheruserComponent {
     }
   }
 
+  // Reload page to update content.
   load() {
     window.location.reload(true);
   }

@@ -22,8 +22,8 @@
         <p class="card-text">location: {{otherAccount.location}}</p>
         <p class="card-text">email: {{otherAccount.email}}</p>
         <p class="card-text">website: {{otherAccount.website}}</p>
-        <button class="btn btn-outline-primary" (click)="followUser()">follow</button>
-        <button class="btn btn-outline-primary" (click)="unfollowUser()">unfollow</button>
+        <button class="btn btn-outline-primary" (click)="followUser(checkLoggedInUser, otherAccount.name)">follow</button>
+        <button class="btn btn-outline-primary" (click)="unFollowUser(checkLoggedInUser, otherAccount.name)">unfollow</button>
       </div>
     </div>
 
