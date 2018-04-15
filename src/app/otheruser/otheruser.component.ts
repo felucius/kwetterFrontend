@@ -22,8 +22,12 @@ export class OtheruserComponent {
   followers: Account[];
   observableAccounts: Observable<Account[]>;
   observableTweets: Observable<Tweet[]>;
+  observableTweet: Observable<Tweet>;
+  observableLikes: Observable<Account[]>;
   tweets: Tweet[];
   tweet: Tweet;
+  likedTweet: Tweet;
+  tweetLikes: Account[];
 
   observableFollowing: Observable<Boolean>;
   follower: Boolean;
@@ -41,7 +45,7 @@ export class OtheruserComponent {
         this.getTweetsFromUser(this.name);
         this.getFollowing(this.name);
         this.getFollowers(this.name);
-      }else {
+      } else {
         this.router.navigate(['./profile']);
       }
 
@@ -79,6 +83,16 @@ export class OtheruserComponent {
   unFollowUser(userName: String, userUnfollowing: String) {
     this.observableFollowing = this.accountService.unFollowUser(userName, userUnfollowing);
     this.observableFollowing.subscribe(follower => this.follower = follower);
+  }
+
+  likeTweet(user: Account, tweetId: number) {
+    this.observableTweet = this.tweetService.likeTweet(user, tweetId);
+    this.observableTweet.subscribe(tweetToLike => this.tweet = tweetToLike);
+  }
+
+  getTweetLikes(tweetId: number) {
+    this.observableLikes = this.tweetService.getTweetLikes(tweetId);
+    this.observableLikes.subscribe(getLikes => this.tweetLikes = getLikes);
   }
 
   visitUser(name: String) {

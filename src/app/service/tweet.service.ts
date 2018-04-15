@@ -81,4 +81,14 @@ export class TweetService {
     return this.http.get('http://localhost:8080/KwetterBackend_Maxime/api/tweets/findtagbycontent/' + tag)
       .map(this.extractData);
   }
+
+  likeTweet(user: Account, tweetId: number): Observable<Tweet> {
+    return this.http.post('http://localhost:8080/KwetterBackend_Maxime/api/users/liketweet/' + user + '/' + tweetId, user + '/' + tweetId)
+      .map(this.extractData);
+  }
+
+  getTweetLikes(tweetId: number): Observable<Account[]> {
+    return this.http.get('http://localhost:8080/KwetterBackend_Maxime/api/tweets/gettweetlikes/' + tweetId)
+      .map(this.extractData);
+  }
 }

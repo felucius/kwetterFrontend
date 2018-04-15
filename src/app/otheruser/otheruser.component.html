@@ -22,8 +22,8 @@
         <p class="card-text">location: {{otherAccount.location}}</p>
         <p class="card-text">email: {{otherAccount.email}}</p>
         <p class="card-text">website: {{otherAccount.website}}</p>
-        <button class="btn btn-outline-primary" (click)="followUser(checkLoggedInUser, otherAccount.name)">follow</button>
-        <button class="btn btn-outline-primary" (click)="unFollowUser(checkLoggedInUser, otherAccount.name)">unfollow</button>
+        <button class="btn btn-outline-primary" (click)="followUser(checkLoggedInUser, otherAccount.name);load()">follow</button>
+        <button class="btn btn-outline-primary" (click)="unFollowUser(checkLoggedInUser, otherAccount.name);load()">unfollow</button>
       </div>
     </div>
 
@@ -36,6 +36,11 @@
               <h5 class="card-title">{{tweet.message}}</h5>
               <p class="card-text">{{tweet.published}}</p>
               <p class="card-text">{{tweet.tag}}</p>
+              <p *ngIf="tweet.likes.length == 0; else elselikes">likes: 0</p>
+              <ng-template #elselikes>
+                <p>likes: {{tweet.likes.length}}</p>
+              </ng-template>
+              <button class="btn btn-outline-primary" (click)="likeTweet(checkLoggedInUser, tweet.id);load()">like</button>
             </div>
           </div>
         </div>
