@@ -95,7 +95,10 @@ export class AccountComponent {
   removeTweet(tweet: Tweet) {
     if (confirm('Remove message: ' + tweet.message)) {
       this.observableTweet = this.tweetService.removeExistingTweet(tweet);
-      this.observableTweet.subscribe(editTweet => this.tweet = editTweet);
+      this.observableTweet.subscribe(editTweet => {
+        this.tweet = editTweet;
+        this.load();
+      });
     } else {
       // Canceled.
     }
@@ -119,5 +122,10 @@ export class AccountComponent {
       localStorage.setItem('otherUser', name.toString());
       this.router.navigate(['/otheruser']);
     }
+  }
+
+  // Reload page to update content.
+  load() {
+    window.location.reload(true);
   }
 }
