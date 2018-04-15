@@ -83,6 +83,7 @@ export class HomeComponent {
         data => {
           this.alertService.success('New kweet succesfully added', true);
           alert('Succesfully added a new tweet.');
+          this.load();
         },
         error => {
           this.alertService.error(error);
@@ -98,5 +99,10 @@ export class HomeComponent {
   searchTweetByTag(tag: String) {
     this.observableTweets = this.tweetService.searchTweetByTag(tag);
     this.observableTweets.subscribe(searchTweets => this.searchTweets = searchTweets);
+  }
+
+  // Reload page to update content.
+  load() {
+    window.location.reload(true);
   }
 }
